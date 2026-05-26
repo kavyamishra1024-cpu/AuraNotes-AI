@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraNotes AI ✨</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>✨ AuraNotes AI ✨</h1>
+        <p>🫧 Upload your notes and get AI-powered summaries, quizzes & flashcards 🎀</p>
+    </div>
+
+    <!-- UPLOAD CARD -->
+    <div class="card">
+
+        <h3>📁 Upload Your Cute Notes 🌸</h3>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label for="pdf-upload" class="upload-box">
+
+                <p>💗 Click to upload PDF notes 💗</p>
+                <span>Supports PDF files only ✨</span>
+
+                <input
+                    type="file"
+                    id="pdf-upload"
+                    name="file"
+                    hidden
+                    onchange="this.form.submit()"
+                >
+
+            </label>
+
+        </form>
+
+        {% if filename %}
+        <div class="file-name">
+            📄 {{ filename }}
+        </div>
+        {% endif %}
+
+    </div>
+
+    <!-- AFTER FILE UPLOAD -->
+    {% if filename %}
+
+    <div class="card">
+
+        <form method="POST">
+
+            <input type="hidden" name="action" value="summarize">
+            <input type="hidden" name="filename" value="{{ filename }}">
+            <input type="hidden" name="style" id="styleInput" value="exam">
+
+            <div class="card-label">
+                🎨 Choose Summary Mode
+            </div>
+
+            <div class="style-row">
+
+                <button type="button"
+                        class="style-btn active"
+                        onclick="setStyle('exam', this)">
+                    📚 Exam Mode
+                </button>
+
+                <button type="button"
+                        class="style-btn"
+                        onclick="setStyle('revision', this)">
+                    ⚡ Revision
+                </button>
+
+                <button type="button"
+                        class="style-btn"
+                        onclick="setStyle('beginner', this)">
+                    🌱 Beginner
+                </button>
+
+                <button type="button"
+                        class="style-btn"
+                        onclick="setStyle('bullet', this)">
+                    📌 Bullet Notes
+                </button>
+
+            </div>
+
+            <button type="submit" class="btn-primary">
+                🪄 Generate AI Summary
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- EXTRACTED TEXT -->
+    {% if extracted_text %}
+
+    <div class="card">
+
+        <div class="card-label">
+            📋 Extracted Notes 🫧
+        </div>
+
+        <div class="notes-preview">
+            {{ extracted_text[:1500] }}
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- SUMMARY -->
+    {% if summary %}
+
+    <div class="card">
+
+        <div class="card-label">
+            ✨ AI Summary
+            <span class="ai-badge">AI GENERATED 🎀</span>
+        </div>
+
+        <div class="summary-box">
+
+            {% for line in summary.split('\n') %}
+
+                {% if line.strip() %}
+                    <p>{{ line }}</p>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        <!-- VIVA BUTTON -->
+        <form method="POST">
+
+            <input type="hidden" name="action" value="quiz">
+            <input type="hidden" name="filename" value="{{ filename }}">
+
+            <button type="submit" class="btn-secondary">
+                🧠 Generate Viva Questions
+            </button>
+
+        </form>
+
+        <!-- FLASHCARDS BUTTON -->
+        <form method="POST" style="margin-top:12px;">
+
+            <input type="hidden" name="action" value="flashcards">
+            <input type="hidden" name="filename" value="{{ filename }}">
+
+            <button type="submit" class="btn-secondary">
+                🪄 Generate Flashcards
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- QUIZ -->
+    {% if quiz %}
+
+    <div class="card">
+
+        <div class="card-label">
+            🧠 Viva Questions 🌸
+        </div>
+
+        <div class="quiz-box">
+
+            {% for line in quiz.split('\n') %}
+
+                {% if line.strip() %}
+
+                    {% if line.startswith('Q') %}
+                        <p class="q-line">{{ line }}</p>
+
+                    {% elif line.startswith('A') %}
+                        <p class="a-line">{{ line }}</p>
+
+                    {% else %}
+                        <p>{{ line }}</p>
+
+                    {% endif %}
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- FLASHCARDS -->
+    {% if flashcards %}
+
+    <div class="card">
+
+        <div class="card-label">
+            🪄 AI Flashcards 🎀
+        </div>
+
+        <div class="quiz-box">
+
+            {% for line in flashcards.split('\n') %}
+
+                {% if line.strip() %}
+
+                    {% if line.startswith('Front') %}
+                        <p class="q-line">{{ line }}</p>
+
+                    {% elif line.startswith('Back') %}
+                        <p class="a-line">{{ line }}</p>
+
+                    {% else %}
+                        <p>{{ line }}</p>
+
+                    {% endif %}
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- DOWNLOAD -->
+    {% if summary %}
+
+    <div class="card">
+
+        <div class="card-label">
+            📥 Download Study Pack 🎀
+        </div>
+
+        <p style="margin-bottom:14px;color:#8b7ca8;font-size:0.92rem;">
+            Download your AI notes + viva questions + flashcards ✨
+        </p>
+
+        <form method="POST" action="/download-pdf">
+
+            <input type="hidden" name="summary" value="{{ summary }}">
+            <input type="hidden" name="quiz" value="{{ quiz }}">
+            <input type="hidden" name="flashcards" value="{{ flashcards }}">
+            <input type="hidden" name="filename" value="{{ filename }}">
+
+            <button type="submit" class="btn-download">
+                ⬇️ Download PDF Notes
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+function setStyle(style, button){
+
+    document.getElementById('styleInput').value = style;
+
+    document.querySelectorAll('.style-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    button.classList.add('active');
+}
+
+</script>
+
+</body>
+</html>

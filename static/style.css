@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Nunito',sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #fdfbff 0%,
+        #eef6ff 35%,
+        #f5efff 70%,
+        #fef6fb 100%
+    );
+
+    min-height:100vh;
+    padding:40px 15px;
+    color:#4b4b6b;
+}
+
+/* MAIN CONTAINER */
+
+.container,
+.wrapper{
+    width:100%;
+    max-width:850px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.header h1{
+    font-size:3.5rem;
+    font-weight:900;
+
+    background: linear-gradient(
+        90deg,
+        #ff8dc7,
+        #8d83ff,
+        #72cfff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:10px;
+}
+
+.header p,
+.subtitle{
+    color:#7d7da8;
+    font-size:1rem;
+    font-weight:600;
+}
+
+/* CARDS */
+
+.card{
+    background: rgba(255,255,255,0.75);
+
+    backdrop-filter: blur(18px);
+
+    border-radius:28px;
+
+    padding:28px;
+
+    margin-bottom:25px;
+
+    border:1px solid rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 10px 35px rgba(170,190,255,0.18),
+        0 5px 12px rgba(255,190,220,0.12);
+
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card-label,
+.card h3{
+    font-size:1.2rem;
+    font-weight:800;
+    color:#7266e6;
+    margin-bottom:18px;
+}
+
+/* UPLOAD AREA */
+
+.upload-area,
+.upload-box{
+
+    width:100%;
+
+    border:2px dashed #d8cfff;
+
+    border-radius:24px;
+
+    padding:45px 20px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,245,252,0.95),
+        rgba(240,248,255,0.95)
+    );
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.upload-area:hover,
+.upload-box:hover{
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,240,250,1),
+        rgba(232,244,255,1)
+    );
+
+    transform:scale(1.01);
+}
+
+.upload-area label,
+.upload-box p{
+
+    color:#8578c9;
+
+    font-size:1.1rem;
+
+    font-weight:800;
+}
+
+.upload-area p,
+.upload-box span{
+
+    margin-top:10px;
+
+    color:#a29ac7;
+
+    font-size:0.92rem;
+
+    font-weight:600;
+}
+
+.upload-area input[type="file"]{
+    display:none;
+}
+
+/* FILE BADGE */
+
+.file-badge,
+.file-name{
+
+    display:inline-block;
+
+    margin-top:18px;
+
+    padding:10px 16px;
+
+    border-radius:14px;
+
+    background:#fff0f8;
+
+    color:#d45d96;
+
+    font-weight:700;
+
+    font-size:0.92rem;
+}
+
+/* BUTTONS */
+
+.btn-primary,
+.main-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    margin-top:20px;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    color:white;
+
+    cursor:pointer;
+
+    background: linear-gradient(
+        90deg,
+        #ff9fcb,
+        #9388ff,
+        #7ad1ff
+    );
+
+    box-shadow:
+        0 8px 25px rgba(160,180,255,0.25);
+
+    transition:0.3s ease;
+}
+
+.btn-primary:hover,
+.main-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(160,180,255,0.35);
+}
+
+/* SECONDARY BUTTON */
+
+.btn-secondary{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:18px;
+
+    border:none;
+
+    margin-top:15px;
+
+    background:#f3efff;
+
+    color:#7569e8;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+
+.btn-secondary:hover{
+    background:#ece6ff;
+}
+
+/* STYLE BUTTONS */
+
+.style-row,
+.mode-row{
+
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+
+    margin-top:12px;
+}
+
+.style-btn,
+.mode-btn{
+
+    flex:1;
+
+    min-width:120px;
+
+    padding:12px;
+
+    border-radius:18px;
+
+    border:2px solid #e5dcff;
+
+    background:white;
+
+    color:#7b70e6;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+}
+
+.style-btn:hover,
+.mode-btn:hover{
+    background:#f5f0ff;
+}
+
+.style-btn.active,
+.mode-btn.active{
+
+    background: linear-gradient(
+        90deg,
+        #ff9fcb,
+        #9488ff,
+        #7cd2ff
+    );
+
+    color:white;
+
+    border:none;
+}
+
+/* SUMMARY */
+
+.summary-box,
+.quiz-box,
+.notes-box{
+
+    background: rgba(255,255,255,0.85);
+
+    border-radius:20px;
+
+    padding:22px;
+
+    line-height:1.9;
+
+    border:1px solid #f1ebff;
+
+    color:#5d5d77;
+}
+
+.summary-box p,
+.quiz-box p{
+    margin-bottom:10px;
+}
+
+/* BADGE */
+
+.ai-badge,
+.badge{
+
+    background: linear-gradient(
+        90deg,
+        #ff9dc8,
+        #9287ff
+    );
+
+    color:white;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    font-size:0.72rem;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+/* FLASHCARD */
+
+.flashcard{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    margin-top:16px;
+
+    border:1px solid #f0eaff;
+
+    box-shadow:0 5px 15px rgba(180,180,255,0.10);
+}
+
+.flashcard h4{
+    color:#7668ea;
+    margin-bottom:10px;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#d9cfff;
+    border-radius:20px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .header h1{
+        font-size:2.5rem;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .style-btn,
+    .mode-btn{
+        min-width:100%;
+    }
+}
